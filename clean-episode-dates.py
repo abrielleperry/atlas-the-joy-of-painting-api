@@ -12,7 +12,7 @@ processed_data = []
 for line in raw_content:
     match = re.match(r'"(.+)"\s\((.+)\)', line.strip())
     if match:
-        episode_name = match.group(1)
+        episode = match.group(1)
         date_extra = match.group(2)
         # extract date and extra info
         date_match = re.match(r'([\w]+\s\d{1,2},\s\d{4})(.*)', date_extra)
@@ -22,7 +22,7 @@ for line in raw_content:
         else:
             date = date_extra.strip()
             extra = ""
-        processed_data.append({"Episode Name": episode_name, "Date": date, "Extra": extra})
+        processed_data.append({"Episode": episode, "Date": date, "Extra": extra})
 
 # convert the processed data to a DataFrame
 processed_df = pd.DataFrame(processed_data)

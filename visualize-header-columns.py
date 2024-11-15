@@ -1,29 +1,30 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 
-
+# List of file names
 file_names = ['Episode-Dates.csv', 'Subject-Matter.csv', 'Colors-Used.csv']
 
-# dict to store the number of columns in each file
-header_counts = {}
+# Dictionary to store headers for each file
+header_data = {}
 
 for file_name in file_names:
+    print(f"Processing file: {file_name}")
     try:
-        # read the file into a DataFrame
+        # Read the file into a DataFrame
         df = pd.read_csv(file_name)
-
-        # count the number of columns in header
-        header_counts[file_name] = len(df.columns)
+        
+        # Store headers under the file name
+        header_data[file_name] = df.columns.tolist()
     except Exception as e:
-        print(f"Error reading {file_name}: {e}")
-        header_counts[file_name] = 0
+        print(f"Error processing {file_name}: {e}")
+        header_data[file_name] = []
 
-# visualization
-plt.figure(figsize=(10, 6))
-plt.bar(header_counts.keys(), header_counts.values())
-plt.xlabel('File Name')
-plt.ylabel('Number of Header Columns')
-plt.title('Number of Header Columns in Each File')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
+# Convert the dictionary to a DataFrame
+headers_df = pd.DataFrame.from_dict(header_data, orient='index').transpose()
+
+# Save the table to a CSV file
+output_file = 'headers_by_file.csv'
+headers_df.to_csv(output_file, index=False)
+print(f"Table of headers saved as '{output_file}'")
+
+# Display the table (optional)
+print(headers_df)
