@@ -1,70 +1,70 @@
 Episode-Dates.csv,Subject-Matter.csv,Colors-Used.csv
-Title,Episode,Unnamed: 0
-Date,Title,painting_index
-Extra,Apple Frame,img_src
-,Aurora Borealis,painting_title
-,Barn,season
-,Beach,episode
-,Boat,num_colors
-,Bridge,youtube_src
-,Building,colors
-,Bushes,color_hex
-,Cabin,Black_Gesso
-,Cactus,Bright_Red
-,Circle Frame,Burnt_Umber
-,Cirrus,Cadmium_Yellow
-,Cliff,Dark_Sienna
-,Clouds,Indian_Red
-,Conifer,Indian_Yellow
-,Cumulus,Liquid_Black
-,Deciduous,Liquid_Clear
-,Diane Andre,Midnight_Black
-,Dock,Phthalo_Blue
-,Double Oval Frame,Phthalo_Green
-,Farm,Prussian_Blue
-,Fence,Sap_Green
-,Fire,Titanium_White
-,Florida Frame,Van_Dyke_Brown
-,Flowers,Yellow_Ochre
-,Fog,Alizarin_Crimson
-,Framed,
-,Grass,
-,Guest,
-,Half Circle Frame,
-,Half Oval Frame,
-,Hills,
-,Lake,
-,Lakes,
-,Lighthouse,
-,Mill,
-,Moon,
-,Mountain,
-,Mountains,
-,Night,
-,Ocean,
-,Oval Frame,
-,Palm Trees,
-,Path,
-,Person,
-,Portrait,
-,Rectangle 3D Frame,
-,Rectangular Frame,
-,River,
-,Rocks,
-,Seashell Frame,
-,Snow,
-,Snowy Mountain,
-,Split Frame,
-,Steve Ross,
-,Structure,
-,Sun,
-,Tomb Frame,
-,Tree,
-,Trees,
-,Triple Frame,
-,Waterfall,
-,Waves,
-,Windmill,
-,Window Frame,
-,Winter,
-,Wood Framed,
+Title,EPISODE,Unnamed: 0
+Date,TITLE,painting_index
+Extra,APPLE_FRAME,img_src
+,AURORA_BOREALIS,painting_title
+,BARN,season
+,BEACH,episode
+,BOAT,num_colors
+,BRIDGE,youtube_src
+,BUILDING,colors
+,BUSHES,color_hex
+,CABIN,Black_Gesso
+,CACTUS,Bright_Red
+,CIRCLE_FRAME,Burnt_Umber
+,CIRRUS,Cadmium_Yellow
+,CLIFF,Dark_Sienna
+,CLOUDS,Indian_Red
+,CONIFER,Indian_Yellow
+,CUMULUS,Liquid_Black
+,DECIDUOUS,Liquid_Clear
+,DIANE_ANDRE,Midnight_Black
+,DOCK,Phthalo_Blue
+,DOUBLE_OVAL_FRAME,Phthalo_Green
+,FARM,Prussian_Blue
+,FENCE,Sap_Green
+,FIRE,Titanium_White
+,FLORIDA_FRAME,Van_Dyke_Brown
+,FLOWERS,Yellow_Ochre
+,FOG,Alizarin_Crimson
+,FRAMED,
+,GRASS,
+,GUEST,
+,HALF_CIRCLE_FRAME,
+,HALF_OVAL_FRAME,
+,HILLS,
+,LAKE,
+,LAKES,
+,LIGHTHOUSE,
+,MILL,
+,MOON,
+,MOUNTAIN,
+,MOUNTAINS,
+,NIGHT,
+,OCEAN,
+,OVAL_FRAME,
+,PALM_TREES,
+,PATH,
+,PERSON,
+,PORTRAIT,
+,RECTANGLE_3D_FRAME,
+,RECTANGULAR_FRAME,
+,RIVER,
+,ROCKS,
+,SEASHELL_FRAME,
+,SNOW,
+,SNOWY_MOUNTAIN,
+,SPLIT_FRAME,
+,STEVE_ROSS,
+,STRUCTURE,
+,SUN,
+,TOMB_FRAME,
+,TREE,
+,TREES,
+,TRIPLE_FRAME,
+,WATERFALL,
+,WAVES,
+,WINDMILL,
+,WINDOW_FRAME,
+,WINTER,
+,WOOD_FRAMED,
