@@ -1,13 +1,16 @@
+
 # atlas-the-joy-of-painting-api
 
-Welcome to the **atlas-the-joy-of-painting-api** repository! This project is designed to support your local public broadcasting station by building a centralized database and API to manage and filter episodes of *The Joy of Painting* based on specific criteria requested by viewers.
+Welcome to the **atlas-the-joy-of-painting-api** repository! This project is designed to support my local public broadcasting station by building a centralized database and API to manage and filter episodes of *The Joy of Painting* based on specific criteria requested by viewers.
 
 ---
 
+
+
 ## 📂 Resources
 
-- **Bob Ross Episode Data CSV**: Contains episode details such as broadcast dates and subjects painted.
-- **Bob Ross Paint Color Details CSV**: Includes the color palettes used in the episodes.
+- [**Bob Ross Episode Data CSV**](https://github.com/fivethirtyeight/data/blob/master/bob-ross/elements-by-episode.csv): Contains episode details such as broadcast dates and subjects painted.
+- [**Bob Ross Paint Color Details CSV**](https://github.com/jwilber/Bob_Ross_Paintings/blob/master/data/bob_ross_paintings.csv): Includes the color palettes used in the episodes.
 
 ---
 
