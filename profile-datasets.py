@@ -1,10 +1,10 @@
 import pandas as pd
-from pandas_profiling import ProfileReport
+from ydata_profiling import ProfileReport
 
 # load datasets Colors-Used, Subject_Matter, and Episode_Dates
-colors_used = pd.read_csv('/mnt/data/Colors-Used.csv')
-subject_matter = pd.read_csv('/mnt/data/Subject-Matter.csv')
-episode_dates = pd.read_csv('/mnt/data/Episode-Dates.csv')
+colors_used = pd.read_csv('Colors-Used.csv')
+subject_matter = pd.read_csv('Subject-Matter.csv')
+episode_dates = pd.read_csv('Episode-Dates.csv')
 
 # create profiling reports
 profile_colors_used = ProfileReport(colors_used, title="Colors Dataset Profiling Report")
