@@ -1,32 +1,32 @@
 Episode-Dates.csv,Subject-Matter.csv,Colors-Used.csv
-Title,Episode,Unnamed: 0
-Date,Title,painting_index
-Extra,Apple Frame,img_src
-,Aurora Borealis,painting_title
-,Barn,season
-,Beach,episode
-,Boat,num_colors
-,Bridge,youtube_src
-,Building,colors
-,Bushes,color_hex
-,Cabin,Black_Gesso
-,Cactus,Bright_Red
-,Circle Frame,Burnt_Umber
-,Cirrus,Cadmium_Yellow
-,Cliff,Dark_Sienna
-,Clouds,Indian_Red
-,Conifer,Indian_Yellow
-,Cumulus,Liquid_Black
-,Deciduous,Liquid_Clear
-,Diane Andre,Midnight_Black
-,Dock,Phthalo_Blue
-,Double Oval Frame,Phthalo_Green
-,Farm,Prussian_Blue
-,Fence,Sap_Green
-,Fire,Titanium_White
-,Florida Frame,Van_Dyke_Brown
-,Flowers,Yellow_Ochre
-,Fog,Alizarin_Crimson
+Title,Episode,Index
+Date,Title,Painting Index
+Extra,Apple Frame,Image Source
+,Aurora Borealis,Painting Title
+,Barn,Season
+,Beach,Episode
+,Boat,Number Of Colors
+,Bridge,Youtube Source
+,Building,Colors
+,Bushes,Color Hex
+,Cabin,Black Gesso
+,Cactus,Bright Red
+,Circle Frame,Burnt Umber
+,Cirrus,Cadmium Yellow
+,Cliff,Dark Sienna
+,Clouds,Indian Red
+,Conifer,Indian Yellow
+,Cumulus,Liquid Black
+,Deciduous,Liquid Clear
+,Diane Andre,Midnight Black
+,Dock,Phthalo Blue
+,Double Oval Frame,Phthalo Green
+,Farm,Prussian Blue
+,Fence,Sap Green
+,Fire,Titanium White
+,Florida Frame,Van Dyke Brown
+,Flowers,Yellow Ochre
+,Fog,Alizarin Crimson
 ,Framed,
 ,Grass,
 ,Guest,
