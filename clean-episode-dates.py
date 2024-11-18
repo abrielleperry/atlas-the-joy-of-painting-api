@@ -13,6 +13,8 @@ for line in raw_content:
     match = re.match(r'"(.+)"\s\((.+)\)', line.strip())
     if match:
         title = match.group(1)
+        # replace 'Mount McKinley' with 'Mt. McKinley' in the title
+        title = title.replace('Mount McKinley', 'Mt. McKinley')
         date_extra = match.group(2)
         # extract date and extra info
         date_match = re.match(r'([\w]+\s\d{1,2},\s\d{4})(.*)', date_extra)
