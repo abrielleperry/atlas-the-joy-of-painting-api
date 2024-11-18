@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_names = ['Episode-Dates.csv', 'Subject-Matter.csv', 'Colors-Used.csv']
+file_names = ["Episode-Dates.csv", "Subject-Matter.csv", "Colors-Used.csv"]
 
 # dict to store headers for each file
 header_data = {}
@@ -18,10 +18,10 @@ for file_name in file_names:
         header_data[file_name] = []
 
 # convert the dict to a DataFrame
-headers_df = pd.DataFrame.from_dict(header_data, orient='index').transpose()
+headers_df = pd.DataFrame.from_dict(header_data, orient="index").transpose()
 
 # save the table to a CSV file
-output_file = 'headers_by_file.csv'
+output_file = "headers_by_file.csv"
 headers_df.to_csv(output_file, index=False)
 print(f"Table of headers saved as '{output_file}'")
 

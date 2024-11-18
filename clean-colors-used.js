@@ -5,13 +5,11 @@ const csv = require("csv-parser");
 const inputFile = "Colors-Used.csv";
 const outputFile = "Colors-Used.csv";
 
-// Read and process the CSV
 const rows = [];
 fs.createReadStream(inputFile)
   .pipe(csv())
   .on("data", (row) => rows.push(row))
   .on("end", () => {
-    // Transform column headers
     const updatedRows = rows.map((row) => {
       const updatedRow = {};
       Object.keys(row).forEach((col) => {
@@ -27,11 +25,9 @@ fs.createReadStream(inputFile)
       return updatedRow;
     });
 
-    // Convert JSON back to CSV
-    const fields = Object.keys(updatedRows[0]); // Extract new headers
+    const fields = Object.keys(updatedRows[0]);
     const updatedCsv = parse(updatedRows, { fields });
 
-    // Write the updated CSV
     fs.writeFile(outputFile, updatedCsv, (err) => {
       if (err) {
         console.error("Error writing the updated CSV:", err);
