@@ -16,7 +16,7 @@ fs.createReadStream(inputFile)
         let newCol = col.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
         if (newCol === "Num Colors") newCol = "Number of Colors";
         if (newCol === "Youtube Src") newCol = "Youtube Source";
-        if (newCol === "Unnamed: 0") newCol = "Index";
+        if (newCol === "") newCol = "Index";
         if (newCol === "Img Src") newCol = "Image Source";
         if (newCol === "Painting Title") newCol = "Title";
 
