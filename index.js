@@ -27,9 +27,10 @@ const readCSVFile = (filePath) => {
 
   let dbClient;
   try {
-    dbClient = new MongoClient(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    dbClient = new MongoClient(MONGO_URI);
     await dbClient.connect();
     console.log("Connected to MongoDB successfully!");
+
 
     const database = dbClient.db(DATABASE_NAME);
     console.log(`Database '${DATABASE_NAME}' is ready!`);
