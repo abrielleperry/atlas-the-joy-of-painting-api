@@ -1,20 +1,15 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const fs = require("fs");
-const csvParser = require("csv-parser"); // For CSV parsing
+const csvParser = require("csv-parser");
 
-// MongoDB connection URI (replace with your credentials)
-const MONGO_URI = "<your_connection_uri>";
-
-// MongoDB Database Name
+const MONGO_URI = "mongodb+srv://abrielleperry22:m5MFaOfAuit571pL@atlasschool.x25kz.mongodb.net/?retryWrites=true&w=majority&appName=atlasschool";
 const DATABASE_NAME = "TheJoyOfPainting";
 
-// Dataset file paths (replace with actual paths)
-const COLORS_FILE = "./datasets/TJOP-Colors-Used-Original.csv";
-const EPISODES_FILE = "./datasets/TJOP-Episode-Dates-Original.csv";
-const SUBJECTS_FILE = "./datasets/TJOP-Subject-Matter-Original.csv";
+const COLORS_USED_FILE = "./datasets/Colors-Used.csv";
+const EPISODE_DATES_FILE = "./datasets/Episode-Dates.csv";
+const SUBJECT_MATTER_FILE = "./datasets/Subject-Matter.csv";
 
-// Helper to read CSV files
 const readCSVFile = (filePath) => {
   return new Promise((resolve, reject) => {
     const data = [];
@@ -27,59 +22,69 @@ const readCSVFile = (filePath) => {
 };
 
 (async () => {
-  // Initialize Express app
   const app = express();
   app.use(express.json());
 
   let dbClient;
-  let database;
-
   try {
-    // Connect to MongoDB
     dbClient = new MongoClient(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     await dbClient.connect();
     console.log("Connected to MongoDB successfully!");
 
-    // Access the database
-    database = dbClient.db(DATABASE_NAME);
+    const database = dbClient.db(DATABASE_NAME);
     console.log(`Database '${DATABASE_NAME}' is ready!`);
 
-    // Insert data from the dataset files
-    const colorsData = await readCSVFile(COLORS_FILE);
-    const episodesData = await readCSVFile(EPISODES_FILE);
-    const subjectsData = await readCSVFile(SUBJECTS_FILE);
+    try {
+      const colorsUsedData = await readCSVFile(COLORS_USED_FILE);
+      if (colorsUsedData.length > 0) {
+        const colorsCollection = database.collection("colors_used");
+        await colorsCollection.insertMany(colorsUsedData);
+        console.log("Inserted Colors Data into 'colors_used' collection.");
+      } else {
+        console.warn("Colors Used dataset is empty. Skipping insertion.");
+      }
+    } catch (err) {
+      console.error("Error processing Colors Used dataset:", err);
+    }
 
-    // Insert Colors Data
-    const colorsCollection = database.collection("colors_used");
-    await colorsCollection.insertMany(colorsData);
-    console.log("Inserted Colors Data into 'colors_used' collection.");
+    try {
+      const episodeDatesData = await readCSVFile(EPISODE_DATES_FILE);
+      if (episodeDatesData.length > 0) {
+        const episodesCollection = database.collection("episode_dates");
+        await episodesCollection.insertMany(episodeDatesData);
+        console.log("Inserted Episode Dates Data into 'episode_dates' collection.");
+      } else {
+        console.warn("Episode Dates dataset is empty. Skipping insertion.");
+      }
+    } catch (err) {
+      console.error("Error processing Episode Dates dataset:", err);
+    }
 
-    // Insert Episodes Data
-    const episodesCollection = database.collection("episodes");
-    await episodesCollection.insertMany(episodesData);
-    console.log("Inserted Episodes Data into 'episodes' collection.");
-
-    // Insert Subject Matter Data
-    const subjectsCollection = database.collection("subject_matter");
-    await subjectsCollection.insertMany(subjectsData);
-    console.log("Inserted Subject Matter Data into 'subject_matter' collection.");
+    try {
+      const subjectMatterData = await readCSVFile(SUBJECT_MATTER_FILE);
+      if (subjectMatterData.length > 0) {
+        const subjectsCollection = database.collection("subject_matter");
+        await subjectsCollection.insertMany(subjectMatterData);
+        console.log("Inserted Subject Matter Data into 'subject_matter' collection.");
+      } else {
+        console.warn("Subject Matter dataset is empty. Skipping insertion.");
+      }
+    } catch (err) {
+      console.error("Error processing Subject Matter dataset:", err);
+    }
   } catch (err) {
-    console.error("Error:", err);
-    process.exit(1);
+    console.error("Database connection error:", err);
   }
 
-  // Define a simple route to verify server is running
   app.get("/", (req, res) => {
     res.send("The Joy Of Painting Database is connected and populated with dataset files!");
   });
 
-  // Start Express server
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
 
-  // Close MongoDB connection gracefully when the app terminates
   process.on("SIGINT", async () => {
     if (dbClient) {
       await dbClient.close();
