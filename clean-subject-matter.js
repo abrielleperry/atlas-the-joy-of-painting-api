@@ -10,10 +10,9 @@ function replaceUnderscores(filePath, outputFilePath) {
 
         const updatedContent = data.replace(/_/g, ' ');
 
-
-        const quotesRemovedContent = removeQuotesFromTitleColumn(updatedContent);
-        const capitalizedContent = capitalizeFirstLetterOfWords(quotesRemovedContent);
-        const seasonSplitContent = splitSeasonAndEpisode(capitalizedContent);
+        const lowercaseContent = makeHeadersAndValuesLowercase(updatedContent);
+        const quotesRemovedContent = removeQuotesFromTitleColumn(lowercaseContent);
+        const seasonSplitContent = splitSeasonAndEpisode(quotesRemovedContent); // FIXED
 
         fs.writeFile(outputFilePath, seasonSplitContent, (err) => {
             if (err) {
@@ -24,6 +23,25 @@ function replaceUnderscores(filePath, outputFilePath) {
             console.log(`File successfully updated! New file saved as ${outputFilePath}`);
         });
     });
+}
+
+function makeHeadersAndValuesLowercase(csvContent) {
+    const lines = csvContent.split('\n');
+    if (lines.length === 0) return csvContent; // Return unchanged if no content
+
+    // Process headers
+    const headers = lines[0].split(',').map(header => header.trim().toLowerCase());
+
+    // Process each line
+    const processedLines = lines.map((line, index) => {
+        const cells = line.split(',');
+        // Convert headers (line 0) or values (other lines) to lowercase
+        return index === 0
+            ? headers.join(',')
+            : cells.map(cell => cell.trim().toLowerCase()).join(',');
+    });
+
+    return processedLines.join('\n');
 }
 
 function removeQuotesFromTitleColumn(csvContent) {
@@ -52,21 +70,6 @@ function removeQuotesFromTitleColumn(csvContent) {
     return processedLines.join('\n');
 }
 
-function capitalizeFirstLetterOfWords(csvContent) {
-    const lines = csvContent.split('\n');
-    return lines.map(line => {
-        return line
-            .split(',')
-            .map(cell => 
-                cell
-                    .trim()
-                    .toLowerCase()
-                    .replace(/\b\w/g, char => char.toUpperCase())
-            )
-            .join(',');
-    }).join('\n');
-}
-
 function splitSeasonAndEpisode(csvContent) {
     const lines = csvContent.split('\n');
     const headers = lines[0].split(',');
@@ -78,7 +81,7 @@ function splitSeasonAndEpisode(csvContent) {
         return csvContent;
     }
 
-    headers.splice(episodeIndex, 0, 'Season');
+    headers.splice(episodeIndex, 0, 'season');
 
     const processedLines = lines.map((line, index) => {
         if (index === 0) return headers.join(',');
@@ -102,6 +105,7 @@ function splitSeasonAndEpisode(csvContent) {
     return processedLines.join('\n');
 }
 
-const inputFilePath = path.resolve(__dirname, 'Subject-Matter.csv');
-const outputFilePath = path.resolve(__dirname, 'Subject-Matter.csv');
+// Input/Output Paths
+const inputFilePath = path.resolve(__dirname, './datasets/Subject-Matter.csv');
+const outputFilePath = path.resolve(__dirname, './datasets/Subject-Matter.csv');
 replaceUnderscores(inputFilePath, outputFilePath);
