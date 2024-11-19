@@ -2,8 +2,8 @@ const fs = require("fs");
 const { parse } = require("json2csv");
 const csv = require("csv-parser");
 
-const inputFile = "Colors-Used.csv";
-const outputFile = "Colors-Used.csv";
+const inputFile = "./datasets/Colors-Used.csv";
+const outputFile = "./datasets/Colors-Used.csv";
 
 const rows = [];
 fs.createReadStream(inputFile)
@@ -13,18 +13,23 @@ fs.createReadStream(inputFile)
     const updatedRows = rows.map((row) => {
       const updatedRow = {};
       Object.keys(row).forEach((col) => {
-        let newCol = col.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
-        if (newCol === "Num Colors") newCol = "Number of Colors";
-        if (newCol === "Youtube Src") newCol = "Youtube Source";
-        if (newCol === "") newCol = "Index";
-        if (newCol === "Img Src") newCol = "Image Source";
-        if (newCol === "Painting Title") newCol = "Title";
+        // Replace underscores with spaces and make lowercase
+        let newCol = col.replace(/_/g, " ").toLowerCase();
+        
+        // Handle specific column name replacements and convert to lowercase
+        if (newCol === "num colors") newCol = "number of colors";
+        if (newCol === "youtube src") newCol = "youtube source";
+        if (newCol === "") newCol = "index";
+        if (newCol === "img src") newCol = "image source";
+        if (newCol === "painting title") newCol = "title";
 
-        updatedRow[newCol] = row[col];
+        // Assign the updated column name to the value and make value lowercase
+        updatedRow[newCol] = row[col].toLowerCase();
       });
       return updatedRow;
     });
 
+    // Ensure headers are lowercase in the final CSV
     const fields = Object.keys(updatedRows[0]);
     const updatedCsv = parse(updatedRows, { fields });
 
