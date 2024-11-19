@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { parse } = require("json2csv");
 
-const filePath = "Episode-Dates.csv";
+const filePath = "./datasets/Episode-Dates.csv";
 
 fs.readFile(filePath, "utf8", (err, data) => {
   if (err) {
@@ -31,13 +31,15 @@ fs.readFile(filePath, "utf8", (err, data) => {
           extra = "";
         }
 
-        return { Title: title, Date: date, Extra: extra };
+        // Convert values to lowercase
+        return { title: title.toLowerCase(), date: date.toLowerCase(), extra: extra.toLowerCase() };
       }
       return null;
     })
     .filter((item) => item !== null);
 
-  const fields = ["Title", "Date", "Extra"];
+  // Convert field names to lowercase
+  const fields = ["title", "date", "extra"];
   const csvData = parse(processedData, { fields });
 
   fs.writeFile(filePath, csvData, (err) => {
