@@ -18,7 +18,6 @@ fs.readFile(filePath, "utf8", (err, data) => {
         let title = match[1];
         const dateExtra = match[2];
 
-        title = title.replace("Mount McKinley", "Mt. McKinley");
 
         const dateMatch = dateExtra.match(/([\w]+\s\d{1,2},\s\d{4})(.*)/);
         let date, extra;
