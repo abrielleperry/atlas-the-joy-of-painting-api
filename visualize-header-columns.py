@@ -1,6 +1,10 @@
 import pandas as pd
 
-file_names = ["Episode-Dates.csv", "Subject-Matter.csv", "Colors-Used.csv"]
+file_names = [
+    "./datasets/Episode-Dates.csv",
+    "./datasets/Subject-Matter.csv",
+    "./datasets/Colors-Used.csv",
+]
 
 # dict to store headers for each file
 header_data = {}

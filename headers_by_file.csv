@@ -1,71 +1,71 @@
-Episode-Dates.csv,Subject-Matter.csv,Colors-Used.csv
-Title,Episode,Index
-Date,Title,Painting Index
-Extra,Apple Frame,Image Source
-,Aurora Borealis,Painting Title
-,Barn,Season
-,Beach,Episode
-,Boat,Number Of Colors
-,Bridge,Youtube Source
-,Building,Colors
-,Bushes,Color Hex
-,Cabin,Black Gesso
-,Cactus,Bright Red
-,Circle Frame,Burnt Umber
-,Cirrus,Cadmium Yellow
-,Cliff,Dark Sienna
-,Clouds,Indian Red
-,Conifer,Indian Yellow
-,Cumulus,Liquid Black
-,Deciduous,Liquid Clear
-,Diane Andre,Midnight Black
-,Dock,Phthalo Blue
-,Double Oval Frame,Phthalo Green
-,Farm,Prussian Blue
-,Fence,Sap Green
-,Fire,Titanium White
-,Florida Frame,Van Dyke Brown
-,Flowers,Yellow Ochre
-,Fog,Alizarin Crimson
-,Framed,
-,Grass,
-,Guest,
-,Half Circle Frame,
-,Half Oval Frame,
-,Hills,
-,Lake,
-,Lakes,
-,Lighthouse,
-,Mill,
-,Moon,
-,Mountain,
-,Mountains,
-,Night,
-,Ocean,
-,Oval Frame,
-,Palm Trees,
-,Path,
-,Person,
-,Portrait,
-,Rectangle 3D Frame,
-,Rectangular Frame,
-,River,
-,Rocks,
-,Seashell Frame,
-,Snow,
-,Snowy Mountain,
-,Split Frame,
-,Steve Ross,
-,Structure,
-,Sun,
-,Tomb Frame,
-,Tree,
-,Trees,
-,Triple Frame,
-,Waterfall,
-,Waves,
-,Windmill,
-,Window Frame,
-,Winter,
-,Wood Framed,
-,Season,
+./datasets/Episode-Dates.csv,./datasets/Subject-Matter.csv,./datasets/Colors-Used.csv
+title,season,index
+date,episode,painting index
+extra,title,image source
+,apple frame,title
+,aurora borealis,season
+,barn,episode
+,beach,number of colors
+,boat,youtube source
+,bridge,colors
+,building,color hex
+,bushes,black gesso
+,cabin,bright red
+,cactus,burnt umber
+,circle frame,cadmium yellow
+,cirrus,dark sienna
+,cliff,indian red
+,clouds,indian yellow
+,conifer,liquid black
+,cumulus,liquid clear
+,deciduous,midnight black
+,diane andre,phthalo blue
+,dock,phthalo green
+,double oval frame,prussian blue
+,farm,sap green
+,fence,titanium white
+,fire,van dyke brown
+,florida frame,yellow ochre
+,flowers,alizarin crimson
+,fog,
+,framed,
+,grass,
+,guest,
+,half circle frame,
+,half oval frame,
+,hills,
+,lake,
+,lakes,
+,lighthouse,
+,mill,
+,moon,
+,mountain,
+,mountains,
+,night,
+,ocean,
+,oval frame,
+,palm trees,
+,path,
+,person,
+,portrait,
+,rectangle 3d frame,
+,rectangular frame,
+,river,
+,rocks,
+,seashell frame,
+,snow,
+,snowy mountain,
+,split frame,
+,steve ross,
+,structure,
+,sun,
+,tomb frame,
+,tree,
+,trees,
+,triple frame,
+,waterfall,
+,waves,
+,windmill,
+,window frame,
+,winter,
+,wood framed,
