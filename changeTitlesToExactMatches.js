@@ -21,7 +21,6 @@ async function updateDocuments() {
             { oldValue: 'arctic winter day', newValue: 'an arctic winter day' },
             { oldValue: 'pretty autumn day', newValue: 'a pretty autumn day' },
             { oldValue: 'half oval vignette', newValue: 'half-oval vignette' },
-
             { oldValue: "perfect winter's day", newValue: 'a perfect winter day' },
             { oldValue: 'spectacular view', newValue: 'a spectacular view' },
             { oldValue: "woodsman's retreat", newValue: "woodman's retreat" },
