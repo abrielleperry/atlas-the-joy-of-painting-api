@@ -1,61 +1,32 @@
-const filterEpisodes = async (db, query) => {
-  const { months, subjects, colors, match = "all" } = query;
+require("dotenv").config();
+const { MongoClient } = require("mongodb");
 
-  const colorsCollection = db.collection("colors_used");
-  const datesCollection = db.collection("episode_dates");
-  const subjectsCollection = db.collection("subject_matter");
+async function filterEpisodeDatesByMonth(month) {
+  const client = new MongoClient(process.env.MONGO_URI);
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB successfully!");
 
-  const filters = [];
+    const database = client.db(process.env.DATABASE_NAME);
 
-  if (months) {
-    const monthsArray = months.split(",").map((month) => month.trim());
-    const monthFilter = { date: { $regex: `-${monthsArray.join("|")}-` } };
-    const monthResults = await datesCollection.find(monthFilter).toArray();
-    const monthTitles = monthResults.map((doc) => doc.title);
-    filters.push(monthTitles);
+    const result = await database.collection('episode_dates').aggregate([
+      { $match: { date: { $regex: `^${month}`, $options: 'i' } } },
+      { $sort: { date: 1 } }
+    ]).toArray();
+
+    if (result.length === 0) {
+      console.log(`No episodes found for month: ${month}`)
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Error fetching episode dates:", error.message);
+    throw error;
+  } finally {
+    await client.close();
   }
+}
 
-  if (subjects) {
-    const subjectsArray = subjects.split(",").map((subject) => subject.trim());
-    const subjectFilter = { $or: subjectsArray.map((subject) => ({ [subject]: true })) };
-    const subjectResults = await subjectsCollection.find(subjectFilter).toArray();
-    const subjectTitles = subjectResults.map((doc) => doc.title);
-    filters.push(subjectTitles);
-  }
 
-  if (colors) {
-    const colorsArray = colors.split(",").map((color) => color.trim());
-    const colorFilter = { $or: colorsArray.map((color) => ({ [color]: { $exists: true } })) };
-    const colorResults = await colorsCollection.find(colorFilter).toArray();
-    const colorTitles = colorResults.map((doc) => doc.title);
-    filters.push(colorTitles);
-  }
+module.exports = { filterEpisodeDatesByMonth }
 
-  let finalTitles;
-  if (match === "all") {
-    finalTitles = filters.reduce((acc, curr) =>
-      acc.filter((title) => curr.includes(title))
-    );
-  } else {
-    finalTitles = Array.from(new Set(filters.flat()));
-  }
-
-  const results = await Promise.all(
-    finalTitles.map(async (title) => {
-      const colorDoc = await colorsCollection.findOne({ title });
-      const dateDoc = await datesCollection.findOne({ title });
-      const subjectDoc = await subjectsCollection.findOne({ title });
-
-      return {
-        title,
-        date: dateDoc?.date || null,
-        subjects: subjectDoc || {},
-        colors: colorDoc || {},
-      };
-    })
-  );
-
-  return results;
-};
-
-module.exports = { filterEpisodes };

@@ -2,13 +2,13 @@ require("dotenv").config();
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const loadData = require("./loadData");
-const { filterEpisodes } = require("./filterEpisodes");
+const { filterEpisodeDatesByMonth } = require("./filterEpisodes");
 const cors = require("cors");
 
 
 const MONGO_URI = process.env.MONGO_URI;
 const DATABASE_NAME = process.env.DATABASE_NAME;
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 (async () => {
   const app = express();
@@ -31,19 +31,18 @@ const PORT = process.env.PORT || 5000;
       console.error("Error loading data:", err.message);
     }
 
-    app.get("/", (req, res) => {
-      res.send("The Joy Of Painting Database is connected and ready!");
-    });
-
-    app.get("/episodes", async (req, res) => {
+    app.get('/episode-dates', async (req, res) => {
       try {
-        const results = await filterEpisodes(database, req.query);
-        res.json(results);
-      } catch (err) {
-        console.error("Error fetching filtered episodes:", err.message);
-        res.status(500).json({ message: "Internal Server Error" });
+        const month = req.query.month.toLowerCase();
+        const result = await filterEpisodeDatesByMonth(month);
+
+        res.json(result);
+      } catch (error) {
+        console.error("Error fetching episode dates:", error.message);
+        res.status(500).json({ error: 'Error fetching data' });
       }
     });
+
 
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);
