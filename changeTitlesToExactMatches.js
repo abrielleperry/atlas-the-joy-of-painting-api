@@ -3,7 +3,6 @@ const { MongoClient } = require('mongodb');
 const MONGO_URI = "mongodb+srv://abrielleperry22:m5MFaOfAuit571pL@atlasschool.x25kz.mongodb.net/?retryWrites=true&w=majority&appName=atlasschool";
 const DATABASE_NAME = "TheJoyOfPainting";
 
-// Function to update documents
 async function updateDocuments() {
     const client = new MongoClient(MONGO_URI);
     try {
@@ -12,7 +11,6 @@ async function updateDocuments() {
 
         const collections = ['colors_used', 'subject_matter', 'episode_dates'];
 
-        // First update: 'cold spring day' to 'a cold spring day'
         const updates = [
             { oldValue: 'cold spring day', newValue: 'a cold spring day' },
             { oldValue: 'trace of spring', newValue: 'a trace of spring' },
@@ -63,13 +61,12 @@ async function updateDocuments() {
             { oldValue: "old place home", newValue: "the old home place" },
 
 
-          ];
+        ];
 
         for (const { oldValue, newValue } of updates) {
             for (const collectionName of collections) {
                 const collection = db.collection(collectionName);
 
-                // Update documents where 'title' equals the oldValue
                 const result = await collection.updateMany(
                     { title: oldValue },
                     { $set: { title: newValue } }
@@ -85,5 +82,4 @@ async function updateDocuments() {
     }
 }
 
-// Run the function
 updateDocuments();

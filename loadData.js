@@ -1,14 +1,12 @@
 const fs = require("fs");
 const csvParser = require("csv-parser");
 
-// Collection names
 const COLLECTIONS = {
   COLORS_USED: "colors_used",
   EPISODE_DATES: "episode_dates",
   SUBJECT_MATTER: "subject_matter",
 };
 
-// Function to read CSV files
 const readCSVFile = (filePath) => {
   return new Promise((resolve, reject) => {
     const data = [];
@@ -20,7 +18,6 @@ const readCSVFile = (filePath) => {
   });
 };
 
-// Function to insert data row by row with strict error handling
 const insertDataStrict = async (data, collection, collectionName) => {
   try {
     for (const [index, row] of data.entries()) {
@@ -34,17 +31,15 @@ const insertDataStrict = async (data, collection, collectionName) => {
     console.log(`All data successfully inserted into '${collectionName}'.`);
   } catch (err) {
     console.error(`Aborting import for '${collectionName}' due to errors.`);
-    throw err; // Rethrow to handle at a higher level
+    throw err;
   }
 };
 
-// Main function to load data into MongoDB
 const loadData = async (database) => {
   const COLORS_USED_FILE = process.env.COLORS_USED_FILE;
   const EPISODE_DATES_FILE = process.env.EPISODE_DATES_FILE;
   const SUBJECT_MATTER_FILE = process.env.SUBJECT_MATTER_FILE;
 
-  // Load Colors Data
   try {
     const colorsUsedData = await readCSVFile(COLORS_USED_FILE);
     const colorsCollection = database.collection(COLLECTIONS.COLORS_USED);
@@ -59,7 +54,6 @@ const loadData = async (database) => {
     console.error(`Error processing ${COLLECTIONS.COLORS_USED} dataset:`, err.message);
   }
 
-  // Load Episode Dates Data
   try {
     const episodeDatesData = await readCSVFile(EPISODE_DATES_FILE);
     const episodesCollection = database.collection(COLLECTIONS.EPISODE_DATES);
@@ -74,7 +68,6 @@ const loadData = async (database) => {
     console.error(`Error processing ${COLLECTIONS.EPISODE_DATES} dataset:`, err.message);
   }
 
-  // Load Subject Matter Data
   try {
     const subjectMatterData = await readCSVFile(SUBJECT_MATTER_FILE);
     const subjectsCollection = database.collection(COLLECTIONS.SUBJECT_MATTER);

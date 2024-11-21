@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { MongoClient } = require("mongodb");
-const loadData = require("./loadData"); // Import loadData.js
+const loadData = require("./loadData");
 const { filterEpisodes } = require("./filterEpisodes");
 const cors = require("cors");
 
@@ -18,14 +18,12 @@ const PORT = process.env.PORT || 5000;
   let dbClient;
 
   try {
-    // Connect to MongoDB
     dbClient = new MongoClient(MONGO_URI);
     await dbClient.connect();
     console.log("Connected to MongoDB successfully!");
 
     const database = dbClient.db(DATABASE_NAME);
 
-    // Load data into MongoDB collections
     try {
       await loadData(database);
       console.log("Data successfully loaded into MongoDB.");
@@ -33,7 +31,6 @@ const PORT = process.env.PORT || 5000;
       console.error("Error loading data:", err.message);
     }
 
-    // Define Routes
     app.get("/", (req, res) => {
       res.send("The Joy Of Painting Database is connected and ready!");
     });
@@ -48,12 +45,10 @@ const PORT = process.env.PORT || 5000;
       }
     });
 
-    // Start the server
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);
     });
 
-    // Graceful shutdown
     process.on("SIGINT", async () => {
       if (dbClient) {
         await dbClient.close();
@@ -63,6 +58,6 @@ const PORT = process.env.PORT || 5000;
     });
   } catch (err) {
     console.error("Database connection error:", err.message);
-    process.exit(1); // Exit if database connection fails
+    process.exit(1);
   }
 })();

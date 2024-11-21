@@ -1,15 +1,12 @@
-// Helper function to handle filtering logic
 const filterEpisodes = async (db, query) => {
   const { months, subjects, colors, match = "all" } = query;
 
-  // Collections
   const colorsCollection = db.collection("colors_used");
   const datesCollection = db.collection("episode_dates");
   const subjectsCollection = db.collection("subject_matter");
 
   const filters = [];
 
-  // Filter by Months
   if (months) {
     const monthsArray = months.split(",").map((month) => month.trim());
     const monthFilter = { date: { $regex: `-${monthsArray.join("|")}-` } };
@@ -18,7 +15,6 @@ const filterEpisodes = async (db, query) => {
     filters.push(monthTitles);
   }
 
-  // Filter by Subjects
   if (subjects) {
     const subjectsArray = subjects.split(",").map((subject) => subject.trim());
     const subjectFilter = { $or: subjectsArray.map((subject) => ({ [subject]: true })) };
@@ -27,7 +23,6 @@ const filterEpisodes = async (db, query) => {
     filters.push(subjectTitles);
   }
 
-  // Filter by Colors
   if (colors) {
     const colorsArray = colors.split(",").map((color) => color.trim());
     const colorFilter = { $or: colorsArray.map((color) => ({ [color]: { $exists: true } })) };
@@ -36,7 +31,6 @@ const filterEpisodes = async (db, query) => {
     filters.push(colorTitles);
   }
 
-  // Combine Results
   let finalTitles;
   if (match === "all") {
     finalTitles = filters.reduce((acc, curr) =>
@@ -46,7 +40,6 @@ const filterEpisodes = async (db, query) => {
     finalTitles = Array.from(new Set(filters.flat()));
   }
 
-  // Fetch Full Episode Details
   const results = await Promise.all(
     finalTitles.map(async (title) => {
       const colorDoc = await colorsCollection.findOne({ title });
