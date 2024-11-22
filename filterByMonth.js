@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
-async function filterEpisodeDatesByMonth(month) {
+async function filterByMonth(month) {
   const client = new MongoClient(process.env.MONGO_URI);
   try {
     await client.connect();
@@ -23,4 +23,4 @@ async function filterEpisodeDatesByMonth(month) {
 }
 
 
-module.exports = { filterEpisodeDatesByMonth }
+module.exports = { filterByMonth }

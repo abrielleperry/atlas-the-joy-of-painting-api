@@ -6,7 +6,6 @@ const DATABASE_NAME = "TheJoyOfPainting";
 
 const COLLECTIONS = ["colors_used", "episode_dates", "subject_matter"];
 
-// Function to get unique titles not in all three collections
 async function getTrulyUniqueTitles() {
   const client = new MongoClient(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
   const titleCounts = {};
@@ -24,7 +23,6 @@ async function getTrulyUniqueTitles() {
       });
     }
 
-    // Filter titles that appear in fewer than all three collections
     const uniqueTitles = Object.keys(titleCounts).filter((title) => titleCounts[title] < 3);
 
     return uniqueTitles;
@@ -36,13 +34,11 @@ async function getTrulyUniqueTitles() {
   }
 }
 
-// Function to log truly unique titles to a file
 async function logTrulyUniqueTitles() {
   try {
     const uniqueTitles = await getTrulyUniqueTitles();
     const logContent = `Titles not in all three collections:\n\n${uniqueTitles.join(", ")}\n`;
 
-    // Write log to a file
     fs.writeFile("truly_unique_titles_log.txt", logContent, (err) => {
       if (err) {
         console.error("Error writing to log file:", err);
@@ -55,5 +51,4 @@ async function logTrulyUniqueTitles() {
   }
 }
 
-// Run the function to log truly unique titles
 logTrulyUniqueTitles();

@@ -2,9 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const loadData = require("./loadData");
-const { filterEpisodeDatesByMonth } = require("./filterEpisodesByMonths");
+const { filterByMonth } = require("./filterByMonth");
+const { filterBySubject } = require("./filterBySubject");
 const cors = require("cors");
-
 
 const MONGO_URI = process.env.MONGO_URI;
 const DATABASE_NAME = process.env.DATABASE_NAME;
@@ -24,21 +24,25 @@ const PORT = process.env.PORT || 5001;
 
     const database = dbClient.db(DATABASE_NAME);
 
-    try {
-      await loadData(database);
-      console.log("Data successfully loaded into MongoDB.");
-    } catch (err) {
-      console.error("Error loading data:", err.message);
-    }
-
     app.get('/episode-dates', async (req, res) => {
       try {
         const month = req.query.month.toLowerCase();
-        const result = await filterEpisodeDatesByMonth(month);
+        const result = await filterByMonth(month);
         res.json(result);
       } catch (error) {
         console.error("Error fetching episode dates:", error.message);
         res.status(500).json({ error: 'Error fetching data' });
+      }
+    });
+
+    app.get('/filter-subjects', async (req, res) => {
+      try {
+        const subjectMatterCollection = database.collection("subject_matter");
+        const results = await filterBySubject(subjectMatterCollection, req.query);
+        res.json(results);
+      } catch (err) {
+        console.error("Error fetching subjects:", err.message);
+        res.status(500).json({ error: "Internal Server Error" });
       }
     });
 
@@ -47,16 +51,11 @@ const PORT = process.env.PORT || 5001;
     });
 
     process.on("SIGINT", async () => {
-      if (dbClient) {
-        await dbClient.close();
-        console.log("MongoDB connection closed.");
-      }
-      process.exit();
+      await dbClient.close();
+      console.log("MongoDB connection closed");
+      process.exit(0);
     });
   } catch (err) {
-    console.error("Database connection error:", err.message);
-    process.exit(1);
+    console.error("Error connecting to MongoDB:", err.message);
   }
 })();
-
-// http://localhost:5001/episode-dates?month=january
