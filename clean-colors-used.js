@@ -13,23 +13,19 @@ fs.createReadStream(inputFile)
     const updatedRows = rows.map((row) => {
       const updatedRow = {};
       Object.keys(row).forEach((col) => {
-        // Replace underscores with spaces and make lowercase
         let newCol = col.replace(/_/g, " ").toLowerCase();
-        
-        // Handle specific column name replacements and convert to lowercase
+
         if (newCol === "num colors") newCol = "number of colors";
         if (newCol === "youtube src") newCol = "youtube source";
         if (newCol === "") newCol = "index";
         if (newCol === "img src") newCol = "image source";
         if (newCol === "painting title") newCol = "title";
 
-        // Assign the updated column name to the value and make value lowercase
         updatedRow[newCol] = row[col].toLowerCase();
       });
       return updatedRow;
     });
 
-    // Ensure headers are lowercase in the final CSV
     const fields = Object.keys(updatedRows[0]);
     const updatedCsv = parse(updatedRows, { fields });
 

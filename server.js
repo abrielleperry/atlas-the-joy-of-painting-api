@@ -3,8 +3,6 @@ const express = require("express");
 const { MongoClient } = require("mongodb");
 const loadData = require("./loadData");
 const { filterEpisodeDatesByMonth } = require("./filterEpisodesByMonths");
-const { filterEpisodeBySubjectMatter } = require("./filterEpisodeBySubjectMatter");
-
 const cors = require("cors");
 
 
@@ -37,25 +35,12 @@ const PORT = process.env.PORT || 5001;
       try {
         const month = req.query.month.toLowerCase();
         const result = await filterEpisodeDatesByMonth(month);
-
         res.json(result);
       } catch (error) {
         console.error("Error fetching episode dates:", error.message);
         res.status(500).json({ error: 'Error fetching data' });
       }
     });
-
-    app.get('/episode-subject-matter', async (req, res) => {
-  try {
-    const subject = req.query.month.toLowerCase();
-    const result = await filterEpisodeBySubjectMatter(subject);
-
-    res.json(result);
-  } catch (error) {
-    console.error("Error fetching episode dates:", error.message);
-    res.status(500).json({ error: 'Error fetching data' });
-  }
-});
 
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);
@@ -73,3 +58,5 @@ const PORT = process.env.PORT || 5001;
     process.exit(1);
   }
 })();
+
+// http://localhost:5001/episode-dates?month=january
