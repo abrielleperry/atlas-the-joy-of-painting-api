@@ -4,14 +4,22 @@ const { MongoClient } = require("mongodb");
 async function filterByColors(database, colors, filterLogic) {
   try {
     const collection = database.collection('colors_used');
-
-    const query = {};
     const colorArray = colors.split(',').map(color => color.trim());
 
+    // Use regex for each color
+    const regexArray = colorArray.map(color => new RegExp(color, 'i')); // Case-insensitive regex
+
+    let query;
     if (filterLogic === 'AND') {
-      query.colors = { $all: colorArray }; // All colors must match
+      // "AND" logic: All colors must match
+      query = {
+        $and: regexArray.map(regex => ({ colors: { $regex: regex } })),
+      };
     } else {
-      query.colors = { $in: colorArray }; // Any color can match
+      // "OR" logic: Any color can match
+      query = {
+        $or: regexArray.map(regex => ({ colors: { $regex: regex } })),
+      };
     }
 
     const results = await collection.find(query).toArray();
