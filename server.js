@@ -4,6 +4,7 @@ const { MongoClient } = require("mongodb");
 const loadData = require("./loadData");
 const { filterByMonth } = require("./filterByMonth");
 const { filterBySubject } = require("./filterBySubject");
+const filterByColors = require('./filterByColor');
 const cors = require("cors");
 
 const MONGO_URI = process.env.MONGO_URI;
@@ -24,7 +25,7 @@ const PORT = process.env.PORT || 5001;
 
     const database = dbClient.db(DATABASE_NAME);
 
-    app.get('/episode-dates', async (req, res) => {
+    app.get('/filter-months', async (req, res) => {
       try {
         const month = req.query.month.toLowerCase();
         const result = await filterByMonth(month);
@@ -43,6 +44,22 @@ const PORT = process.env.PORT || 5001;
       } catch (err) {
         console.error("Error fetching subjects:", err.message);
         res.status(500).json({ error: "Internal Server Error" });
+      }
+    });
+
+    app.get('/filter-colors', async (req, res) => {
+      const { color, filterLogic } = req.query;
+
+      try {
+        if (color) {
+          const episodes = await filterByColors(database, color, filterLogic || 'OR'); // Pass database
+          res.json(episodes);
+        } else {
+          res.status(400).json({ error: 'Color filter is required' });
+        }
+      } catch (error) {
+        console.error('Error fetching episodes:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
       }
     });
 
