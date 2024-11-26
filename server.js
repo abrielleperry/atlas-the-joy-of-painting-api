@@ -5,6 +5,7 @@ const loadData = require("./loadData");
 const { filterByMonth } = require("./filterByMonth");
 const { filterBySubject } = require("./filterBySubject");
 const filterByColors = require('./filterByColor');
+const { combinedFilter } = require('./combinedFilter');
 const cors = require("cors");
 
 const MONGO_URI = process.env.MONGO_URI;
@@ -65,6 +66,32 @@ const PORT = process.env.PORT || 5001;
         res.status(500).json({ error: 'Internal Server Error' });
       }
     });
+
+    app.get('/filter-episodes', async (req, res) => {
+      try {
+        const { month, filterLogic } = req.query;
+
+        // Extract dynamic query parameters for subjects and colors
+        const dynamicQueryParams = { ...req.query };
+        delete dynamicQueryParams.month;
+        delete dynamicQueryParams.filterLogic;
+
+        const episodes = await combinedFilter(database, {
+          month,
+          queryParams: dynamicQueryParams,
+          filterLogic: filterLogic || 'AND'
+        });
+
+        res.json(episodes);
+      } catch (error) {
+        console.error("Error combining filters:", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
+    });
+
+
+
+
 
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);

@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "The Joy of Painting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "b123e456-7890-1234-cdef-56789abcdef0"
+  },
+  "item": [
+    {
+      "name": "Filter by Color",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5001/filter-colors?color=bright red",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["filter-colors"],
+          "query": [
+            {
+              "key": "color",
+              "value": "bright red"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Filter by Subject",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5001/filter-subjects?mountains=1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["filter-subjects"],
+          "query": [
+            {
+              "key": "mountains",
+              "value": "1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Filter by Month",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5001/filter-months?month=january",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["filter-months"],
+          "query": [
+            {
+              "key": "month",
+              "value": "january"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Filter Episodes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5001/filter-episodes?month=january&mountains=1&trees=1&bright red=1&sap green=1&filterLogic=AND",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["filter-episodes"],
+          "query": [
+            {
+              "key": "month",
+              "value": "january"
+            },
+            {
+              "key": "mountains",
+              "value": "1"
+            },
+            {
+              "key": "trees",
+              "value": "1"
+            },
+            {
+              "key": "bright red",
+              "value": "1"
+            },
+            {
+              "key": "sap green",
+              "value": "1"
+            },
+            {
+              "key": "filterLogic",
+              "value": "AND"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
