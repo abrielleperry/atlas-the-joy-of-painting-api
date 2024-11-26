@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Joy of Painting API Tester</title>
+</head>
+<body>
+    <h1>The Joy of Painting API Tester</h1>
+
+    <section>
+        <h2>Filter by Month</h2>
+        <form id="filter-month-form">
+            <p>Select a Month:</p>
+            <div id="month-options">
+                <label><input type="radio" name="month" value="January" checked> January</label><br>
+                <label><input type="radio" name="month" value="February"> February</label><br>
+                <label><input type="radio" name="month" value="March"> March</label><br>
+                <label><input type="radio" name="month" value="April"> April</label><br>
+                <label><input type="radio" name="month" value="May"> May</label><br>
+                <label><input type="radio" name="month" value="June"> June</label><br>
+                <label><input type="radio" name="month" value="July"> July</label><br>
+                <label><input type="radio" name="month" value="August"> August</label><br>
+                <label><input type="radio" name="month" value="September"> September</label><br>
+                <label><input type="radio" name="month" value="October"> October</label><br>
+                <label><input type="radio" name="month" value="November"> November</label><br>
+                <label><input type="radio" name="month" value="December"> December</label><br>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="month-results"></div>
+    </section>
+
+    <section>
+        <h2>Filter by Subject</h2>
+        <form id="filter-subject-form">
+            <label for="subjects">Subjects (comma-separated):</label>
+            <input type="text" id="subjects" name="subjects" placeholder="e.g., mountain, tree">
+            <button type="submit">Submit</button>
+        </form>
+        <div id="subject-results"></div>
+    </section>
+
+    <section>
+        <h2>Filter by Colors</h2>
+        <form id="filter-color-form">
+            <label for="colors">Select Colors:</label><br>
+            <div id="color-options">
+                <label><input type="checkbox" name="colors" value="black gesso"> Black Gesso</label><br>
+                <label><input type="checkbox" name="colors" value="bright red"> Bright Red</label><br>
+                <label><input type="checkbox" name="colors" value="burnt umber"> Burnt Umber</label><br>
+                <label><input type="checkbox" name="colors" value="cadmium yellow"> Cadmium Yellow</label><br>
+                <label><input type="checkbox" name="colors" value="dark sienna"> Dark Sienna</label><br>
+                <label><input type="checkbox" name="colors" value="indian red"> Indian Red</label><br>
+                <label><input type="checkbox" name="colors" value="indian yellow"> Indian Yellow</label><br>
+                <label><input type="checkbox" name="colors" value="liquid black"> Liquid Black</label><br>
+                <label><input type="checkbox" name="colors" value="liquid clear"> Liquid Clear</label><br>
+                <label><input type="checkbox" name="colors" value="midnight black"> Midnight Black</label><br>
+                <label><input type="checkbox" name="colors" value="phthalo blue"> Phthalo Blue</label><br>
+                <label><input type="checkbox" name="colors" value="phthalo green"> Phthalo Green</label><br>
+                <label><input type="checkbox" name="colors" value="prussian blue"> Prussian Blue</label><br>
+                <label><input type="checkbox" name="colors" value="sap green"> Sap Green</label><br>
+                <label><input type="checkbox" name="colors" value="titanium white"> Titanium White</label><br>
+                <label><input type="checkbox" name="colors" value="van dyke brown"> Van Dyke Brown</label><br>
+                <label><input type="checkbox" name="colors" value="yellow ochre"> Yellow Ochre</label><br>
+                <label><input type="checkbox" name="colors" value="alizarin crimson"> Alizarin Crimson</label><br>
+            </div>
+
+            <p>Matching Logic:</p>
+            <label><input type="radio" name="logic" value="OR" checked> Match ANY (OR)</label><br>
+            <label><input type="radio" name="logic" value="AND"> Match ALL (AND)</label><br>
+            <p id="logic-preview">Matching ANY selected colors.</p>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div id="color-results"></div>
+    </section>
+
+    <script>
+        const baseURL = "http://localhost:5001";
+
+        // Filter by Month
+        document.getElementById("filter-month-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const month = document.querySelector("input[name='month']:checked").value;
+            const response = await fetch(`${baseURL}/filter-months?month=${month}`);
+            const data = await response.json();
+            document.getElementById("month-results").innerText = JSON.stringify(data, null, 2);
+        });
+
+        // Filter by Subject
+        document.getElementById("filter-subject-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const subjects = document.getElementById("subjects").value;
+            const response = await fetch(`${baseURL}/filter-subjects?${new URLSearchParams({ subjects })}`);
+            const data = await response.json();
+            document.getElementById("subject-results").innerText = JSON.stringify(data, null, 2);
+        });
+
+        // Filter by Colors
+        document.getElementById("filter-color-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const colors = Array.from(document.querySelectorAll("input[name='colors']:checked"))
+                .map(checkbox => checkbox.value)
+                .join(",");
+            const logic = document.querySelector("input[name='logic']:checked").value;
+            const response = await fetch(`${baseURL}/filter-colors?color=${colors}&filterLogic=${logic}`);
+            const data = await response.json();
+            document.getElementById("color-results").innerText = JSON.stringify(data, null, 2);
+        });
+
+        // Update the logic preview dynamically
+        const logicRadios = document.querySelectorAll("input[name='logic']");
+        const logicPreview = document.getElementById("logic-preview");
+
+        logicRadios.forEach(radio => {
+            radio.addEventListener("change", () => {
+                const selectedLogic = document.querySelector("input[name='logic']:checked").value;
+                logicPreview.textContent =
+                    selectedLogic === "OR"
+                        ? "Matching ANY selected colors."
+                        : "Matching ALL selected colors.";
+            });
+        });
+    </script>
+</body>
+</html>

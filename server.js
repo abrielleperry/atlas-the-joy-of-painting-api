@@ -25,6 +25,7 @@ const PORT = process.env.PORT || 5001;
 
     const database = dbClient.db(DATABASE_NAME);
 
+    // http://localhost:5001/filter-months?month=january
     app.get('/filter-months', async (req, res) => {
       try {
         const month = req.query.month.toLowerCase();
@@ -36,6 +37,7 @@ const PORT = process.env.PORT || 5001;
       }
     });
 
+    // http://localhost:5001/filter-subjects?mountains=1
     app.get('/filter-subjects', async (req, res) => {
       try {
         const subjectMatterCollection = database.collection("subject_matter");
@@ -47,6 +49,7 @@ const PORT = process.env.PORT || 5001;
       }
     });
 
+    // http://localhost:5001/filter-colors?color=bright red
     app.get('/filter-colors', async (req, res) => {
       const { color, filterLogic } = req.query;
 
@@ -76,3 +79,4 @@ const PORT = process.env.PORT || 5001;
     console.error("Error connecting to MongoDB:", err.message);
   }
 })();
+
