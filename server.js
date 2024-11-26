@@ -5,7 +5,7 @@ const loadData = require("./loadData");
 const { filterByMonth } = require("./filterByMonth");
 const { filterBySubject } = require("./filterBySubject");
 const filterByColors = require('./filterByColor');
-const { combinedFilter } = require('./combinedFilter');
+const { combinedFilter } = require('./filtersCombined');
 const cors = require("cors");
 
 const MONGO_URI = process.env.MONGO_URI;
