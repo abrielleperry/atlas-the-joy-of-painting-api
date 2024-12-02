@@ -108,6 +108,9 @@ Here’s how you can use these options to query the API:
   ```plaintext
   http://localhost:5001/filter-months?month=january
   ```
+  ```plaintext
+  http://localhost:5001/filter-months?month=january,december
+  ```
 
 - **Filter by Color**:
   ```plaintext
