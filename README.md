@@ -124,6 +124,9 @@ Here’s how you can use these options to query the API:
   ```
   http://localhost:5001/filter-colors?color=bright red, indian yellow&filterLogic=AND
   ```
+  ```
+  http://localhost:5001/filter-colors?color=bright red, indian yellow&filterLogic=OR
+  ```
 
 - **Combine Filters with Logical Conditions**:
   ```plaintext
