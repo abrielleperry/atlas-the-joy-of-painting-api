@@ -113,6 +113,10 @@ Here’s how you can use these options to query the API:
   ```plaintext
   http://localhost:5001/filter-colors?color=bright red
   ```
+  
+  ```
+  http://localhost:5001/filter-colors?color=bright red, indian yellow&filterLogic=AND
+  ```
 
 - **Combine Filters with Logical Conditions**:
   ```plaintext
