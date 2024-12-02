@@ -1,5 +1,11 @@
+🚨 For example API queries, jump to the [**Getting Started**](#📊-example-api-queries-for-testing) section 🚨
+ ---
 
-# atlas-the-joy-of-painting-api
+
+![Bob Ross](https://gardenandgun.com/wp-content/uploads/2017/10/Bob-Ross-1.png)
+# The Joy of Painting
+
+
 
 Welcome to the **atlas-the-joy-of-painting-api** repository! This project is designed to support my local public broadcasting station by building a centralized database and API to manage and filter episodes of *The Joy of Painting* based on specific criteria requested by viewers.
 
@@ -31,54 +37,15 @@ The database and API developed in this project will integrate seamlessly with a 
 
 ---
 
-## 🛠️ Tasks Overview
 
-### **Task 1: Design a Database**
-Design a database to consolidate the provided data into a structure that supports efficient querying.
 
-- **Requirements**:
-  - Analyze the provided datasets and design a normalized database structure using UML diagrams.
-  - Create SQL scripts to set up the database schema locally.
 
-- **Deliverables**:
-  - UML design document for the database.
-  - SQL scripts for database creation.
-
-### **Task 2: Extract, Transform, Load (ETL)**
-Extract data from the provided files, transform it to fit the database structure, and load it into the database.
-
-- **Requirements**:
-  - Write custom scripts (in any programming language) to handle the ETL process.
-  - Address inconsistencies and clean up data for accuracy.
-  - Ensure data integrity to allow precise filtering in subsequent tasks.
-
-- **Deliverables**:
-  - ETL scripts to populate the database.
-
-### **Task 3: API Development**
-Build an API to allow users to filter episodes based on their desired criteria.
-
-- **Features**:
-  - Filter episodes by:
-    - Month of broadcast.
-    - Subject matter.
-    - Color palette.
-  - Support multiple filters and logical conditions (e.g., "match all" or "match any").
-  - Return results in JSON format.
-  - Handle queries via URL parameters, query strings, or POST data.
-
-- **Deliverables**:
-  - API implementation code.
-  - Local testing capability (e.g., using Postman).
-
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- A SQL database management system (e.g., MySQL, PostgreSQL, etc.).
-- Python, Node.js, or your preferred language for scripting and API development.
-- Postman (or similar tool) for testing the API.
+- **MongoDB**: Ensure MongoDB is installed and running locally or accessible via a cloud instance.
+- **Node.js**: Install Node.js to run the server and scripts.
+- **Postman** (or a similar tool): Use for testing the API.
 
 ### Steps to Run the Project
 1. Clone this repository:
@@ -86,46 +53,82 @@ Build an API to allow users to filter episodes based on their desired criteria.
    git clone https://github.com/<your-username>/atlas-the-joy-of-painting-api.git
    cd atlas-the-joy-of-painting-api
    ```
-2. Set up the database:
-   - Review the UML design document.
-   - Execute the SQL scripts to create the database schema.
+
+2. Set up the MongoDB database:
+   - Ensure your MongoDB instance is running locally or available online.
+   - Update the MongoDB connection string in the `server.js` or configuration file.
 
 3. Run the ETL process:
-   - Execute the ETL scripts to populate the database with data from the CSV files.
+   - Use scripts to populate the MongoDB database with data from the CSV files.
 
-4. Launch the API:
-   - Run the API server locally.
-   - Use Postman to send requests and verify the filtering functionality.
+4. Start the API server:
+   - Launch the server using Node.js:
+     ```bash
+     node server.js
+     ```
+
+5. Test the API:
+   - Use Postman or your preferred tool to send requests and verify the filtering functionality.
+
+---
+
+
+
+
+### 📊 API Filtering Options
+
+#### **Available Subject Matters**
+The following subject matters can be used in filtering API queries:
+
+- `apple frame`, `aurora borealis`, `barn`, `beach`, `boat`, `bridge`, `building`, `bushes`, `cabin`, `cactus`, `circle frame`, `cirrus`, `cliff`, `clouds`, `conifer`, `cumulus`, `deciduous`, `diane andre`, `dock`, `double oval frame`, `farm`, `fence`, `fire`, `florida frame`, `flowers`, `fog`, `framed`, `grass`, `guest`, `half circle frame`, `half oval frame`, `hills`, `lake`, `lakes`, `lighthouse`, `mill`, `moon`, `mountains`, `night`, `ocean`, `oval frame`, `palm trees`, `path`, `person`, `portrait`, `rectangle 3d frame`, `rectangular frame`, `river`, `rocks`, `seashell frame`, `snow`, `snowy mountain`, `split frame`, `steve ross`, `structure`, `sun`, `tomb frame`, `trees`, `triple frame`, `waterfall`, `waves`, `windmill`, `window frame`, `winter`, `wood framed`.
 
 ---
 
-## 📁 Repository Structure
-```
-atlas-the-joy-of-painting-api/
-│
-├── data/
-│   ├── bob_ross_episodes.csv         # Episode data
-│   ├── bob_ross_colors.csv           # Paint color data
-│
-├── sql/
-│   ├── database_schema.sql           # SQL scripts for database setup
-│
-├── etl/
-│   ├── etl_script.py                 # ETL script (language-agnostic placeholder)
-│
-├── api/
-│   ├── app.py                        # API implementation
-│
-├── docs/
-│   ├── database_design.uml           # UML design document
-│
-├── tests/
-│   ├── test_api.postman_collection   # Postman tests
-│
-└── README.md                         # Project documentation
-```
+#### **Available Months**
+You can filter episodes by the following months:
+- `january`, `february`, `march`, `april`, `may`, `june`, `july`, `august`, `september`, `october`, `november`, `december`.
 
 ---
+
+#### **Available Colors**
+Filter episodes using the following color options:
+- `black gesso`, `bright red`, `burnt umber`, `cadmium yellow`, `dark sienna`, `indian red`, `indian yellow`, `liquid black`, `liquid clear`, `midnight black`, `phthalo blue`, `phthalo green`, `prussian blue`, `sap green`, `titanium white`, `van dyke brown`, `yellow ochre`, `alizarin crimson`.
+
+---
+
+### 📊 Example API Queries for Testing
+Here’s how you can use these options to query the API:
+
+- **Filter by Subject Matter**:
+  ```plaintext
+  http://localhost:5001/filter-subjects?mountains=1
+  ```
+
+- **Filter by Month**:
+  ```plaintext
+  http://localhost:5001/filter-months?month=january
+  ```
+
+- **Filter by Color**:
+  ```plaintext
+  http://localhost:5001/filter-colors?color=bright red
+  ```
+  
+  ```
+  http://localhost:5001/filter-colors?color=bright red, indian yellow&filterLogic=AND
+  ```
+
+- **Combine Filters with Logical Conditions**:
+  ```plaintext
+  http://localhost:5001/filter-episodes?month=august&mountains=1&trees=1&bright red=1&sap green=1&filterLogic=AND
+  ```
+
+These queries allow users to filter episodes dynamically using the provided subject matters, months, and colors.
+
+---
+
+
+
 
 ## 🌟 Features
 
@@ -148,4 +151,5 @@ Contributions are welcome! If you encounter any issues or have suggestions, feel
  - <a href="mailto:abrielleperry22@icloud.com">Email</a>
  - [LinkedIn](www.linkedin.com/in/abriellerperry)
   - [GitHub](https://github.com/abrielleperry)
+
 
