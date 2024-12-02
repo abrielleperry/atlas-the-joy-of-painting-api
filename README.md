@@ -121,17 +121,19 @@ Here’s how you can use these options to query the API:
   http://localhost:5001/filter-colors?color=bright red
   ```
   
+
   ```
-  http://localhost:5001/filter-colors?color=bright red, indian yellow&filterLogic=AND
-  ```
-  ```
-  http://localhost:5001/filter-colors?color=bright red, indian yellow&filterLogic=OR
+  http://localhost:5001/filter-colors?color=bright red, indian yellow
   ```
 
 - **Combine Filters with Logical Conditions**:
   ```plaintext
   http://localhost:5001/filter-episodes?month=august&mountains=1&trees=1&bright red=1&sap green=1&filterLogic=AND
   ```
+  ```plaintext
+  http://localhost:5001/filter-episodes?month=august&mountains=1&trees=1&bright red=1&sap green=1&filterLogic=OR
+  ```
+
 
 These queries allow users to filter episodes dynamically using the provided subject matters, months, and colors.
 
