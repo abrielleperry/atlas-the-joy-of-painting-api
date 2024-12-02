@@ -1,17 +1,24 @@
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
-async function filterByMonth(month) {
+
+async function filterByMonth(months) {
   const client = new MongoClient(process.env.MONGO_URI);
   try {
     await client.connect();
     console.log("Connected to MongoDB successfully!");
     const database = client.db(process.env.DATABASE_NAME);
+
+    const monthArray = months.split(',').map(month => month.trim());
+
+    const monthRegex = new RegExp(`^(${monthArray.join('|')})`, 'i');
+
     const result = await database.collection('episode_dates').aggregate([
-      { $match: { date: { $regex: `^${month}`, $options: 'i' } } },
+      { $match: { date: { $regex: monthRegex } } },
       { $sort: { date: 1 } }
     ]).toArray();
+
     if (result.length === 0) {
-      console.log(`No episodes found for month: ${month}`)
+      console.log(`No episodes found for months: ${months}`);
     }
     return result;
   } catch (error) {
@@ -22,5 +29,4 @@ async function filterByMonth(month) {
   }
 }
 
-
-module.exports = { filterByMonth }
+module.exports = { filterByMonth };
