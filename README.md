@@ -104,6 +104,10 @@ Here’s how you can use these options to query the API:
   http://localhost:5001/filter-subjects?mountains=1
   ```
 
+  ```plaintext
+  http://localhost:5001/filter-subjects?trees=1,moon=1
+  ```
+
 - **Filter by Month**:
   ```plaintext
   http://localhost:5001/filter-months?month=january
