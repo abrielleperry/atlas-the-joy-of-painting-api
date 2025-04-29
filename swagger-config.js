@@ -15,14 +15,14 @@ const options = {
       },
     },
     servers: [
-      {
-        url: "http://localhost:5001",
-        description: "Development server",
-      },
-      {
-        url: "https://your-production-url.vercel.app",
-        description: "Production server (update after deployment)",
-      },
+      //  {
+      //   url: "http://localhost:5001",
+      //   description: "Development server",
+      //  },
+      //  {
+      //   url: "https://your-production-url.vercel.app",
+      //   description: "Production server (update after deployment)",
+      //  },
       {
         url: "https://joy-of-painting-api-74b668857b2b.herokuapp.com",
         description: "Production server (update after deployment)",
