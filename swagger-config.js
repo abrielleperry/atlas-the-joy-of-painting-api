@@ -25,7 +25,7 @@ const options = {
       //  },
       {
         url: "https://joy-of-painting-api-74b668857b2b.herokuapp.com",
-        description: "Production server (update after deployment)",
+        description: "Heroku server",
       },
     ],
     components: {
