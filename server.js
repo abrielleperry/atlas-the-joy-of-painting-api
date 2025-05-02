@@ -81,17 +81,83 @@ const PORT = process.env.PORT || 5001;
      *     description: Returns episodes that contain the specified subject(s)
      *     parameters:
      *       - in: query
-     *         name: mountains
+     *         name: apple frame
      *         schema:
      *           type: string
      *           enum: ["1"]
-     *         description: Set to 1 to include mountains
+     *         description: Set to 1 to include apple frame
      *       - in: query
-     *         name: trees
+     *         name: aurora borealis
      *         schema:
      *           type: string
      *           enum: ["1"]
-     *         description: Set to 1 to include trees
+     *         description: Set to 1 to include aurora borealis
+     *       - in: query
+     *         name: barn
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include barn
+     *       - in: query
+     *         name: beach
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include beach
+     *       - in: query
+     *         name: boat
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include boat
+     *       - in: query
+     *         name: bridge
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include bridge
+     *       - in: query
+     *         name: building
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include building
+     *       - in: query
+     *         name: bushes
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include bushes
+     *       - in: query
+     *         name: cabin
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include cabin
+     *       - in: query
+     *         name: cactus
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include cactus
+     *       - in: query
+     *         name: circle frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include circle frame
+     *       - in: query
+     *         name: cirrus
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include cirrus clouds
+     *       - in: query
+     *         name: cliff
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include cliff
      *       - in: query
      *         name: clouds
      *         schema:
@@ -99,17 +165,311 @@ const PORT = process.env.PORT || 5001;
      *           enum: ["1"]
      *         description: Set to 1 to include clouds
      *       - in: query
+     *         name: conifer
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include conifer trees
+     *       - in: query
+     *         name: cumulus
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include cumulus clouds
+     *       - in: query
+     *         name: deciduous
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include deciduous trees
+     *       - in: query
+     *         name: diane andre
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include Diane Andre (guest)
+     *       - in: query
+     *         name: dock
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include dock
+     *       - in: query
+     *         name: double oval frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include double oval frame
+     *       - in: query
+     *         name: farm
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include farm
+     *       - in: query
+     *         name: fence
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include fence
+     *       - in: query
+     *         name: fire
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include fire
+     *       - in: query
+     *         name: florida frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include florida frame
+     *       - in: query
+     *         name: flowers
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include flowers
+     *       - in: query
+     *         name: fog
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include fog
+     *       - in: query
+     *         name: framed
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include framed paintings
+     *       - in: query
+     *         name: grass
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include grass
+     *       - in: query
+     *         name: guest
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include episodes with a guest
+     *       - in: query
+     *         name: half circle frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include half circle frame
+     *       - in: query
+     *         name: half oval frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include half oval frame
+     *       - in: query
+     *         name: hills
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include hills
+     *       - in: query
      *         name: lake
      *         schema:
      *           type: string
      *           enum: ["1"]
      *         description: Set to 1 to include lake
      *       - in: query
+     *         name: lakes
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include multiple lakes
+     *       - in: query
+     *         name: lighthouse
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include lighthouse
+     *       - in: query
+     *         name: mill
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include mill
+     *       - in: query
+     *         name: moon
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include moon
+     *       - in: query
+     *         name: mountains
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include mountains
+     *       - in: query
+     *         name: night
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include night scene
+     *       - in: query
+     *         name: ocean
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include ocean
+     *       - in: query
+     *         name: oval frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include oval frame
+     *       - in: query
+     *         name: palm trees
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include palm trees
+     *       - in: query
+     *         name: path
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include path
+     *       - in: query
+     *         name: person
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include person
+     *       - in: query
+     *         name: portrait
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include portrait
+     *       - in: query
+     *         name: rectangle 3d frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include rectangle 3d frame
+     *       - in: query
+     *         name: rectangular frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include rectangular frame
+     *       - in: query
+     *         name: river
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include river
+     *       - in: query
+     *         name: rocks
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include rocks
+     *       - in: query
+     *         name: seashell frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include seashell frame
+     *       - in: query
      *         name: snow
      *         schema:
      *           type: string
      *           enum: ["1"]
      *         description: Set to 1 to include snow
+     *       - in: query
+     *         name: snowy mountain
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include snowy mountain
+     *       - in: query
+     *         name: split frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include split frame
+     *       - in: query
+     *         name: steve ross
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include Steve Ross (Bob's son)
+     *       - in: query
+     *         name: structure
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include structure
+     *       - in: query
+     *         name: sun
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include sun
+     *       - in: query
+     *         name: tomb frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include tomb frame
+     *       - in: query
+     *         name: trees
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include trees
+     *       - in: query
+     *         name: triple frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include triple frame
+     *       - in: query
+     *         name: waterfall
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include waterfall
+     *       - in: query
+     *         name: waves
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include waves
+     *       - in: query
+     *         name: windmill
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include windmill
+     *       - in: query
+     *         name: window frame
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include window frame
+     *       - in: query
+     *         name: winter
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include winter scene
+     *       - in: query
+     *         name: wood framed
+     *         schema:
+     *           type: string
+     *           enum: ["1"]
+     *         description: Set to 1 to include wood framed
      *     responses:
      *       200:
      *         description: List of episodes with the specified subject(s)
@@ -214,7 +574,7 @@ const PORT = process.env.PORT || 5001;
      *         description: Logic to apply when multiple filters are specified (default is AND)
      *       - in: query
      *         name: additionalParams
-     *         description: Additional parameters for subjects (e.g., mountains=1) or colors
+     *         description: Additional parameters for subjects (e.g., mountains=1) or colors (e.g., sap green) or both combined (e.g., waterfall=1,sap green)
      *     responses:
      *       200:
      *         description: List of episodes matching the combined criteria
@@ -239,6 +599,42 @@ const PORT = process.env.PORT || 5001;
         res.json(episodes);
       } catch (error) {
         console.error("Error combining filters:", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
+    });
+
+    /**
+     * @swagger
+     * /available-colors:
+     *   get:
+     *     summary: Get all available colors
+     *     description: Returns a list of all colors that can be used for filtering
+     *     responses:
+     *       200:
+     *         description: List of available colors
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 type: string
+     *       500:
+     *         description: Server error
+     */
+    app.get("/available-colors", async (req, res) => {
+      try {
+        const colors = await database
+          .collection("colors_used")
+          .aggregate([
+            { $unwind: "$colors" },
+            { $group: { _id: "$colors" } },
+            { $sort: { _id: 1 } },
+          ])
+          .toArray();
+
+        res.json(colors.map((item) => item._id));
+      } catch (error) {
+        console.error("Error fetching available colors:", error);
         res.status(500).json({ error: "Internal Server Error" });
       }
     });
