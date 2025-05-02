@@ -28,19 +28,18 @@ const PORT = process.env.PORT || 5001;
     console.log("Connected to MongoDB successfully!");
 
     const database = dbClient.db(DATABASE_NAME);
-
     /**
      * @swagger
      * /:
      *   get:
-     *     summary: Welcome message
-     *     description: Returns a welcome message for the API
+     *     summary: Redirects to API documentation
+     *     description: Redirects users to the Swagger API documentation
      *     responses:
-     *       200:
-     *         description: Welcome message
+     *       302:
+     *         description: Redirect to API documentation
      */
     app.get("/", (req, res) => {
-      res.json({ message: "Welcome to The Joy of Painting API!" });
+      res.redirect("/api-docs");
     });
 
     /**
